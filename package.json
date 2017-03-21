@@ -1,0 +1,22 @@
+{
+  "name": "qs-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "DATABASE_URL='postgres://localhost:5432/qs_development' mocha",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "migrate": "^0.2.3",
+    "pg": "^6.1.4"
+  }
+}
