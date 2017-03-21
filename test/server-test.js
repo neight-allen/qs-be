@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('chai').assert;
 const request = require('request');
 const app = require('../server');
 const Food = require('../lib/models/food');
