@@ -11,8 +11,10 @@ app.get('/', (request, response) => {
 });
 
 if (!module.parent) { // NEW!
-  app.listen(3000, () => {
-    console.log('QS is live! (http://localhost:3000)');
+  let port = process.env.PORT || 3000;
+  let host = process.env.HEROKU_URL || "http://localhost:3000"
+  app.listen(port, () => {
+    console.log('QS is live! (${host})');
   });
 }
 
