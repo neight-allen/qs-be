@@ -3,7 +3,7 @@ const request = require('request');
 const app = require('../server');
 const Food = require('../lib/models/food');
 
-describe('Server', () => {
+describe('Foods API', () => {
 
   before((done) => {
     this.port = 9876;
@@ -20,38 +20,18 @@ describe('Server', () => {
     this.server.close();
   });
 
-  it('should exist', () => {
-    assert(app);
-  });
-
-  context('GET /', () => {
-
-    it('should return a success response', (done) => {
-      this.request.get('/', (error, response) => {
-        if (error) { done(error); }
-        assert.equal(response.statusCode, 200);
-        done();
-      });
-    });
-
-    it('should return hello world', (done) => {
-      this.request.get('/', (error, response) => {
-        if (error) { done(error); }
-        assert(response.body.includes("Hello World"));
-        done();
-      });
-    });
-
-  });
-
   context('GET /api/v1/:id', () => {
 
     beforeEach((done) => {
-      Food.create({name: "Banana", calories: 35}).then(() => done()).catch(done)
+      Food.create({name: "Banana", calories: 35})
+        .then(() => done())
+        .catch(done);
     });
 
     afterEach((done) => {
-      Food.destroyAll().then(() => done()).catch(done);
+      Food.destroyAll()
+        .then(() => done())
+        .catch(done);
     });
 
     it('should return a 404 if the resource is not found', (done) => {
@@ -63,10 +43,8 @@ describe('Server', () => {
     })
 
     it('should have the name and calories from the food', (done) => {
-      let foodId = 1;
-
-      Food.find(foodId).then( (food) => {
-        this.request.get(`/api/v1/foods/${foodId}`, (error, response) => {
+      Food.find(1).then( (food) => {
+        this.request.get(`/api/v1/foods/1`, (error, response) => {
   		    if (error) { done(error); }
 
           let responseFood = JSON.parse(response.body);
