@@ -7,8 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "DATABASE_URL='postgres://localhost:5432/qs_development' mocha",
-    "start": "node server.js"
+    "pretest": "DATABASE_URL='postgres://localhost:5432/qs_test' migrate --state-file 'migrations/.migrate-test'",
+    "test": "DATABASE_URL='postgres://localhost:5432/qs_test' mocha test/*-test.js",
+    "start": "nodemon server.js",
+    "debug": "DATABASE_URL='postgres://localhost:5432/qs_test' mocha debug test/*-test.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,10 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "migrate": "^0.2.3",
-    "pg": "^6.1.4"
+    "pg": "^6.1.4",
+    "pg-promise": "^5.6.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
